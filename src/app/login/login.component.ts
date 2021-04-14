@@ -11,12 +11,12 @@ import { AccountService } from '@app/_services';
 export class LoginComponent {
 
     submitted = false;
-    onSubmit(data){
+
+    onSubmit(data) {
     this.submitted = true;
     console.warn(data);
     this.router.navigate(['/']);
-    
-}
+    }
 
     constructor(
         private router: Router,
@@ -27,9 +27,6 @@ export class LoginComponent {
             this.router.navigate(['/']);
         }
 
-        if (this.submitted == true) {
-            this.router.navigate(['/']);
-        }
     }
 
     login() {
