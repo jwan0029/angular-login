@@ -1,21 +1,27 @@
-﻿import { Component } from '@angular/core';
+﻿import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { AccountService } from '@app/_services';
 
-@Component({ 
+@Component({
     selector: 'app-login',
-    templateUrl: 'login.component.html' ,
+    templateUrl: 'login.component.html',
     styleUrls: ['./login.component.css']
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit{
+
+    loginForm: FormGroup;
 
     submitted = false;
 
-    onSubmit(data) {
-    this.submitted = true;
-    console.warn(data);
-    this.router.navigate(['/']);
+    onSubmit(loginForm: NgForm) {
+        this.submitted = true;
+        //console.warn(loginForm.value);
+        console.log(loginForm.email);
+        console.log(loginForm.password);
+        if (this.submitted == true) {
+        this.router.navigate(['/thankyou']);}
     }
 
     constructor(
@@ -24,13 +30,29 @@ export class LoginComponent {
     ) {
         // redirect to home if already logged in
         if (this.accountService.accountValue) {
-            this.router.navigate(['/']);
+            this.router.navigate(['/thankyou']);
         }
 
     }
 
     login() {
         this.accountService.login();
-        this.router.navigate(['/']);
+        this.router.navigate(['/thankyou']);
     }
+
+ngOnInit(): void{
+ this.loginForm = new FormGroup({
+ email: new FormControl(null,[
+    Validators.required,
+    Validators.email
+ ]),
+ password: new FormControl(null,[
+     Validators.required
+ ])
+
+ })
+
+}
+
+
 }
