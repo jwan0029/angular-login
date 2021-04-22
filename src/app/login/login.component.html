@@ -1,20 +1,20 @@
-﻿<form [formGroup]="loginForm" (ngSubmit)="onSubmit(loginForm)" #loginForm="ngForm">
+﻿<form [formGroup]="login" (ngSubmit)="onSubmit(login)" >
 <div class="cont">
     <div class="form sign-in">
         <h2>Welcome back,</h2>
-        <label>
+        <label class="form-group">
             <span>Email</span>
-            <input class="form-control" #email="ngModel" id="email" required email="true" type="email" formControlName="email" ngModel>
-            <div [hidden]="email.valid || email.pristine" class="alert alert-danger">
+            <input class="form-control" type="email" formControlName="email" >
+            <!--<div [hidden]="email.valid || email.pristine" class="alert alert-danger">
                <p class="email-error">Email is required</p> 
-            </div>
+            </div>-->
         </label>
-        <label>
+        <label class="form-group">
             <span>Password</span>
-            <input class="form-control" id="password" required type="password" formControlName="password" ngModel>
+            <input class="form-control" type="password" formControlName="password">
         </label>
         <p class="forgot-pass">Forgot password?</p>
-        <nav><button routerlink="thankyou" type="submit" class="submit" (click)="onSubmit(loginForm.value)" [disabled]="!loginForm.valid">Sign In</button></nav>
+        <nav><button  type="submit" class="submit" >Sign In</button></nav>
         <button type="button" class="fb-btn" (click)="login()">Connect with <span>facebook</span></button>
         
     </div>

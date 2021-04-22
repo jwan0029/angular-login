@@ -1,5 +1,5 @@
-﻿import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
+﻿import { Component,OnInit } from '@angular/core';
+import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { AccountService } from '@app/_services';
@@ -9,50 +9,43 @@ import { AccountService } from '@app/_services';
     templateUrl: 'login.component.html',
     styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit{
+export class LoginComponent  implements OnInit{
 
-    loginForm: FormGroup;
-
+    form: FormGroup;
     submitted = false;
 
-    onSubmit(loginForm: NgForm) {
-        this.submitted = true;
+    onSubmit(login) {
+        //this.submitted = true;
         //console.warn(loginForm.value);
-        console.log(loginForm.email);
-        console.log(loginForm.password);
-        if (this.submitted == true) {
-        this.router.navigate(['/thankyou']);}
+        console.log(login.email);
+        console.log(login.password);
+        //if (this.submitted == true) {
+        //this.router.navigate(['/']);}
     }
 
     constructor(
+        private formBuilder: FormBuilder,
         private router: Router,
-        private accountService: AccountService
+        private accountService: AccountService,
     ) {
         // redirect to home if already logged in
         if (this.accountService.accountValue) {
-            this.router.navigate(['/thankyou']);
+            this.router.navigate(['/']);
         }
 
     }
 
-    login() {
-        this.accountService.login();
-        this.router.navigate(['/thankyou']);
+    ngOnInit() {
+        this.form = this.formBuilder.group({
+            username: ['', Validators.required],
+            password: ['', Validators.required]
+        });
     }
 
-ngOnInit(): void{
- this.loginForm = new FormGroup({
- email: new FormControl(null,[
-    Validators.required,
-    Validators.email
- ]),
- password: new FormControl(null,[
-     Validators.required
- ])
-
- })
-
-}
+    login() {
+        this.accountService.login();
+        this.router.navigate(['/']);
+    }
 
 
 }

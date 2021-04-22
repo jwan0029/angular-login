@@ -1,6 +1,6 @@
 ﻿import { NgModule, APP_INITIALIZER } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-//import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 
@@ -17,7 +17,7 @@ import { LoginComponent } from './login';
 @NgModule({
     imports: [
         BrowserModule,
-        //ReactiveFormsModule,
+        ReactiveFormsModule,
         HttpClientModule,
         AppRoutingModule,
         FormsModule
